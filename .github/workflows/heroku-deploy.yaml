@@ -31,7 +31,6 @@ jobs:
       # Push the Docker image to Heroku Container Registry
       - name: Publish
         uses: akhileshns/heroku-deploy@v3.12.12
-        run: heroku container:push web -a $APP_NAME
         with:
           heroku_api_key: ${{ secrets.HEROKU_API_KEY }}
           heroku_app_name: "kubak-landing-api" #Must be unique in Heroku
