@@ -1,4 +1,6 @@
+using KubakLandingApi.Models;
 using KubakLandingApi.Repo;
+using MongoDB.Bson.Serialization.Conventions;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,6 +11,22 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddSingleton<IViewCounterRepo, ViewCounterRepo>();
+
+builder.Services
+                .AddOptions<DatabaseSettings>()
+                .Bind(builder.Configuration.GetSection(nameof(DatabaseSettings)))
+                .ValidateDataAnnotations();
+
+var conventionPack = new ConventionPack
+{
+    new IgnoreIfNullConvention(true),
+    new CamelCaseElementNameConvention(),
+    new IgnoreExtraElementsConvention(true)
+};
+
+ConventionRegistry.Register("default", conventionPack, t => true);
+
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
