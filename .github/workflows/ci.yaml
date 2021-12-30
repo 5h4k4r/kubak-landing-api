@@ -22,8 +22,8 @@ jobs:
       - name: Login to DockerHub
         uses: docker/login-action@v1
         with:
-          username: ${{ secrets.DOCKERHUB_ID }}
-          password: ${{ secrets.DOCKERHUB_PASS }}
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_PASSWORD }}
 
       - name: Build and push
         id: docker_build
@@ -31,6 +31,6 @@ jobs:
         with:
           push: true
           tags: |-
-            shelgir/kubak-landing-api:latest
-            shelgir/kubak-landing-api:${{ github.sha }}
-            shelgir/kubak-landing-api:${{ github.ref_name }}
+            5h4k4r/kubak-landing-api:latest
+            5h4k4r/kubak-landing-api:${{ github.sha }}
+            5h4k4r/kubak-landing-api:${{ github.ref_name }}
