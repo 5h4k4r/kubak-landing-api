@@ -6,7 +6,7 @@ on:
     paths-ignore:
       - "*.md"
 concurrency:
-  group: ci-workflow
+  group: ${{ github.ref_name }}
   cancel-in-progress: true
 
 jobs:
